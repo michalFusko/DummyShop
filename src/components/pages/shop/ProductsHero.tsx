@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import HeroSvg from "../../../../public/svg/HeroSvg";
+import HeroSvg from "../../svg/HeroSvg";
 import { CategoryGroupKey } from "../../../types/category";
 
 interface ProductsHeroProps {

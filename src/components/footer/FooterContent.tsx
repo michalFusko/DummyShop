@@ -1,4 +1,4 @@
-import HeroSvg from "../../../public/svg/HeroSvg";
+import HeroSvg from "../svg/HeroSvg";
 import { CategoryGroupKey } from "../../types/category";
 import { categoryGroups } from "../../utils/categoryGroups";
 import { Link } from "react-router-dom";

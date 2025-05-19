@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "public/svg/HeroSvg.tsx"]
+  "include": ["src", "src/components/svg/HeroSvg.tsx"]
 }
