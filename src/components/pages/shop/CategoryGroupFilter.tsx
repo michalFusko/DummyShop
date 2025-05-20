@@ -23,7 +23,9 @@ const CategoryGroupFilter = ({
 }: CategoryGroupFilterProps) => {
   const navigate = useNavigate();
 
-  const [moveFilter, setMoveFilter] = useState(true);
+  //state for filter animation on mobile when navbar rolls in
+  const [isMdScreen, setIsMdScreen] = useState(false);
+  const [moveFilter, setMoveFilter] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const handleCategoryGroupSelection = (group: CategoryGroupKey) => {
@@ -53,6 +55,25 @@ const CategoryGroupFilter = ({
     }
   }, [selectedCategories, setOpenCategoryGroup]);
 
+  //move filter only below md screens
+  useEffect(() => {
+    const handleResize = () => {
+      const currentScreenSize = window.innerWidth;
+      if (currentScreenSize < 768) {
+        setIsMdScreen(true);
+      } else {
+        setIsMdScreen(false);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   //move filter if navbar appears
   useEffect(() => {
     const handleScroll = () => {
@@ -60,10 +81,10 @@ const CategoryGroupFilter = ({
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         // scrolling down
-        setMoveFilter(false);
+        setMoveFilter(true);
       } else {
         // scrolling up
-        setMoveFilter(true);
+        setMoveFilter(false);
       }
 
       setLastScrollY(currentScrollY);
@@ -81,7 +102,7 @@ const CategoryGroupFilter = ({
       {/* PANEL FOR SELECTING CATEGORY GROUPS */}
       <motion.div
         initial={{ top: 0 }}
-        animate={{ top: !moveFilter ? 0 : "9vh" }}
+        animate={{ top: isMdScreen ? (moveFilter ? 0 : "9vh") : "7vh" }}
         transition={{ duration: 0.5 }}
         className="sticky top-0 z-20 overflow-x-auto bg-white outline outline-black md:top-[7vh]"
       >
