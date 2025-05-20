@@ -58,7 +58,7 @@ const ProductsDisplay = ({
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width > 1773) setAmountOfProducts(10);
+      if (width > 1536) setAmountOfProducts(10);
       else if (width > 1407) setAmountOfProducts(8);
       else setAmountOfProducts(6);
     };
@@ -90,7 +90,7 @@ const ProductsDisplay = ({
       ref={sectionRef}
     >
       {/* DATA DISPLAY */}
-      <main className="grid w-full grid-cols-2 border-black md:grid-cols-[repeat(auto-fit,minmax(350px,1fr))]">
+      <main className="grid w-full grid-cols-2 border-black md:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] 2xl:grid-cols-[repeat(auto-fit,minmax(20%,1fr))]">
         {isLoading && (
           <div className="relative flex h-[50vh] w-full text-black">
             <SimpleLoader loaderText="LOADING PRODUCTS" />
