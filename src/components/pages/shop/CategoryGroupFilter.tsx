@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { categoryGroups } from "../../../utils/categoryGroups";
 import { useNavigate } from "react-router-dom";
 import { CategoryGroupKey } from "../../../types/category";
+import { motion } from "framer-motion";
 
 interface CategoryGroupFilterProps {
   isPanelOpen: boolean;
@@ -21,6 +22,9 @@ const CategoryGroupFilter = ({
   setOpenCategoryGroup,
 }: CategoryGroupFilterProps) => {
   const navigate = useNavigate();
+
+  const [moveFilter, setMoveFilter] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const handleCategoryGroupSelection = (group: CategoryGroupKey) => {
     if (openCategoryGroup !== group) {
@@ -49,10 +53,38 @@ const CategoryGroupFilter = ({
     }
   }, [selectedCategories, setOpenCategoryGroup]);
 
+  //move filter if navbar appears
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // scrolling down
+        setMoveFilter(false);
+      } else {
+        // scrolling up
+        setMoveFilter(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
     <>
       {/* PANEL FOR SELECTING CATEGORY GROUPS */}
-      <div className="sticky top-0 z-20 overflow-x-auto bg-white outline outline-black md:top-[7vh]">
+      <motion.div
+        initial={{ top: 0 }}
+        animate={{ top: !moveFilter ? 0 : "9vh" }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 z-20 overflow-x-auto bg-white outline outline-black md:top-[7vh]"
+      >
         <ul className="flex flex-wrap items-center justify-center gap-y-0 text-black">
           {Object.entries(categoryGroups).map(([group]) => (
             <li
@@ -69,7 +101,7 @@ const CategoryGroupFilter = ({
             </li>
           ))}
         </ul>
-      </div>
+      </motion.div>
       {/* FILTER & SORT BTN TRIGGER - MOBILE */}
       <button
         className="h-[5vh] w-full cursor-pointer bg-black p-1 text-sm text-white md:hidden"

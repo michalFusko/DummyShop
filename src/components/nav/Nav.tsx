@@ -59,7 +59,6 @@ const Nav = ({ windowHeight }: NavProps) => {
   };
 
   //navbar animation
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -179,8 +178,8 @@ const Nav = ({ windowHeight }: NavProps) => {
       {/* MOBILE NAV *****************************/}
       <motion.nav
         initial={{ top: 0 }}
-        animate={{ top: showNav ? 0 : -100 }}
-        transition={{ duration: 0.8 }}
+        animate={{ top: showNav ? 0 : "-9.5vh" }}
+        transition={{ duration: 0.5 }}
         role="navigation"
         aria-label="Main navigation mobile"
         className="fixed flex w-full px-[2vh] pt-[2vh] md:hidden"
