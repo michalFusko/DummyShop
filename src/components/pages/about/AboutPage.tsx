@@ -12,6 +12,7 @@ import MapEmbed from "./MapEmbed";
 import { IoLocationSharp } from "react-icons/io5";
 import CardContainer from "./CardContainer";
 import { technologies } from "../../../utils/technologies";
+import { FaLinkedin, FaStrava } from "react-icons/fa";
 
 const AboutPage = () => {
   const [activeSection, setActiveSection] = useState("BUILD");
@@ -140,7 +141,7 @@ const AboutPage = () => {
                 <img
                   src="/images/about/profile-picture.jpg"
                   alt="My picture"
-                  className="h-full scale-125 bg-yellow-300 object-cover"
+                  className="h-full scale-125 object-cover"
                 />
               </div>
             </header>
@@ -196,27 +197,24 @@ const AboutPage = () => {
                     at it.
                   </p>
                 </li>
-                <li>
-                  <p>
-                    I don’t really use any social media I could refer to. But I
-                    do enjoy running — so if you want to, come give me kudos
-                    on&nbsp;
-                    <a
-                      target="_blank"
-                      href="https://www.strava.com/athletes/161074946"
-                      className="text-orange-500"
-                    >
-                      STRAVA
-                    </a>
-                    !
-                  </p>
-                </li>
               </ul>
-              <div className="mt-10 text-center">
-                <h1>CONTACTS</h1>
-                <div className="flex justify-center gap-10 pt-2 text-xs sm:text-base">
-                  <span>+420 605 029 680</span>
-                  <span>m.fusko28@gmail.com</span>
+              {/* CONTACTS AND LINKS */}
+              <div className="my-10 flex flex-col-reverse items-center justify-center gap-10 text-xs sm:flex-row sm:text-base">
+                <span>+420 605 029 680</span>
+                <span>m.fusko28@gmail.com</span>
+                <div className="flex gap-10">
+                  <a
+                    href="https://www.linkedin.com/in/michal-fusko-2ab900367/"
+                    target="_blank"
+                  >
+                    <FaLinkedin size={30} className="text-[#0A66C2]" />
+                  </a>
+                  <a
+                    href="https://www.strava.com/athletes/161074946"
+                    target="_blank"
+                  >
+                    <FaStrava size={30} className="text-orange-500" />
+                  </a>
                 </div>
               </div>
             </section>
