@@ -58,7 +58,7 @@ const ProductsDisplay = ({
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width > 1536) setAmountOfProducts(10);
+      if (width > 1535) setAmountOfProducts(10);
       else if (width > 1407) setAmountOfProducts(8);
       else setAmountOfProducts(6);
     };
